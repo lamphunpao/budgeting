@@ -19,7 +19,7 @@ const App = () => (
     <TooltipProvider>
       <div className="min-h-screen bg-background overflow-hidden">
         {/* Notification Bar */}
-        <header className="w-full bg-blue-500 text-white py-2 px-4 flex items-center justify-between">
+        <header className="w-full bg-[#00aeff] text-white py-2 px-4 flex items-center justify-between">
           <div className="text-sm font-medium">
             เว็บไซต์นี้เป็นส่วนหนึ่งของ อบจ.ลำพูน
           </div>
