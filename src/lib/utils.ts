@@ -10,13 +10,12 @@ export function formatNumber(value: number | undefined | null): string {
   return new Intl.NumberFormat('th-TH').format(value);
 }
 
+// ฟังก์ชันนี้จะไม่แสดงสัญลักษณ์ ฿ (บาท) ข้างหน้าเลขเงิน
 export function formatCurrency(value: number | undefined | null): string {
   if (value === undefined || value === null) return '-';
   return new Intl.NumberFormat('th-TH', {
-    style: 'currency',
-    currency: 'THB',
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
   }).format(value);
 }
 

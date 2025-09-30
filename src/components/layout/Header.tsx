@@ -6,10 +6,10 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 
-const FISCAL_YEARS = ['2568'];
+const FISCAL_YEARS = ['2569'];
 
 const Header = () => {
-  const [selectedYear, setSelectedYear] = useState('2568');
+  const [selectedYear, setSelectedYear] = useState('2569');
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -27,12 +27,12 @@ const Header = () => {
                 <Link to="/" className="flex items-center gap-2 text-lg font-medium">
                   หน้าหลัก
                 </Link>
-                <Link to="/public-projects" className="flex items-center gap-2 text-lg font-medium">
+                {/* <Link to="/public-projects" className="flex items-center gap-2 text-lg font-medium">
                   โครงการสาธารณะ
                 </Link>
                 <Link to="/map" className="flex items-center gap-2 text-lg font-medium">
                   แผนที่โครงการ
-                </Link>
+                </Link> */}
               </nav>
             </SheetContent>
           </Sheet>
@@ -50,11 +50,11 @@ const Header = () => {
             <Link to="/" className="text-sm font-medium transition-colors hover:text-primary">
               หน้าหลัก
             </Link>
-            <Link to="/public-projects" className="text-sm font-medium transition-colors hover:text-primary">
+            {/* <Link to="/public-projects" className="text-sm font-medium transition-colors hover:text-primary">
               โครงการสาธารณะ
-            </Link>
-            <Link to="/map" className="text-sm font-medium transition-colors hover:text-primary">
-              แผนที่โครงการ
+            </Link> */}
+            <Link to="/projects/2569" className="text-sm font-medium transition-colors hover:text-primary">
+              รายการโครงการ
             </Link>
           </nav>
         </div>

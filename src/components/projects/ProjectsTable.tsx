@@ -157,7 +157,7 @@ const ProjectsTable = ({ projects }: ProjectsTableProps) => {
                     <TableCell className="text-right font-medium tabular-nums">
                       {formatCurrency(project.remaining)}
                     </TableCell>
-                    <TableCell>{getStatusBadge(project.status)}</TableCell>
+                    <TableCell>วางแผนแล้ว</TableCell>
                     <TableCell className="text-center">
                       {project.hasLocation ? (
                         <Button
