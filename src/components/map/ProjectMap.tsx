@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useSearchParams } from 'react-router-dom';
 import { Skeleton } from "@/components/ui/skeleton";
-import Map, { NavigationControl, Marker, Popup } from 'react-map-gl/maplibre';
 import 'maplibre-gl/dist/maplibre-gl.css';
 
 interface Project {
