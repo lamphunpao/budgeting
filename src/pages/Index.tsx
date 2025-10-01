@@ -198,7 +198,7 @@ const Index = () => {
         // เอาทุกหมวด ไม่ต้องกรอง
         // กรองเฉพาะงบดำเนินงานและงบลงทุน
         const constructionProjects = data.filter(
-          (item) => item.lvl1 === 'งบดำเนินงาน' || item.lvl1 === 'งบลงทุน'
+          (item) => item.lvl1 === 'งบลงทุน'
         );
         setCompletedProjectCount(0); // ข้อมูล 2569 ไม่มีสถานะการดำเนินงาน
 
@@ -379,9 +379,9 @@ const Index = () => {
         <Card className="mt-4">
           <CardHeader className="flex flex-col sm:flex-row items-start sm:items-center justify-between space-y-2 sm:space-y-0">
             <div className="space-y-1.5">
-              <CardTitle className="text-lg sm:text-xl">โครงการงบดำเนินงานและลงทุนมูลค่าสูงสุด</CardTitle>
+              <CardTitle className="text-lg sm:text-xl">โครงการงบลงทุนมูลค่าสูงสุด</CardTitle>
               <CardDescription className="text-sm sm:text-base">
-                แสดง 10 โครงการงบดำเนินงานและงบลงทุนที่มีงบประมาณสูงที่สุด
+                แสดง 10 โครงการงบลงทุนที่มีงบประมาณสูงที่สุด
               </CardDescription>
             </div>
             <Button variant="outline" asChild className="w-full sm:w-auto">
