@@ -86,7 +86,7 @@ const Index = () => {
   // ฟังก์ชันสำหรับประมวลผลข้อมูลงบประมาณ 2569
   const processBudgetData2569 = (items: BudgetItem2569[]): BudgetSummary2569 => {
     const totalApproved = items.reduce((sum, item) => sum + item.budget, 0);
-    
+
     // จัดกลุ่มตาม lvl1 (หมวดงบประมาณหลัก)
     const byLvl1: { [key: string]: { approved: number; project_count: number } } = {};
     items.forEach(item => {
@@ -144,7 +144,7 @@ const Index = () => {
 
     // สร้างหัวข้อ CSV
     const headers = ['ลำดับ', 'หมวดงบประมาณหลัก', 'หมวดงบประมาณย่อย', 'โครงการ/กิจกรรม', 'แผนงาน', 'งบประมาณ (บาท)'];
-    
+
     // แปลงข้อมูลเป็น CSV
     const csvContent = [
       headers.join(','),
@@ -186,7 +186,7 @@ const Index = () => {
         setIsLoading(true);
         const response = await fetch('/budgeting/2569/budgeting.json');
         const data: BudgetItem2569[] = await response.json();
-        
+
         // ประมวลผลข้อมูล
         const processedData = processBudgetData2569(data);
         setBudgetData(processedData);
@@ -196,7 +196,10 @@ const Index = () => {
 
         // คำนวณจำนวนโครงการที่เกี่ยวข้องกับการก่อสร้าง
         // เอาทุกหมวด ไม่ต้องกรอง
-        const constructionProjects = data;
+        // กรองเฉพาะงบดำเนินงานและงบลงทุน
+        const constructionProjects = data.filter(
+          (item) => item.lvl1 === 'งบดำเนินงาน' || item.lvl1 === 'งบลงทุน'
+        );
         setCompletedProjectCount(0); // ข้อมูล 2569 ไม่มีสถานะการดำเนินงาน
 
         // แปลงข้อมูลและเรียงลำดับตามงบประมาณสูงสุด
@@ -297,23 +300,23 @@ const Index = () => {
             icon={<Layers />}
           />
           <StatCard
-            title="งบกลาง"
-            value={formatCurrency(budgetData?.by_lvl1?.["งบกลาง"]?.approved || 0)}
-            description={`คิดเป็น ${formatPercentage(budgetData?.by_lvl1?.["งบกลาง"]?.approved || 0, budgetData?.total.approved)} ของงบทั้งหมด`}
+            title="งบลงทุน"
+            value={formatCurrency(budgetData?.by_lvl1?.["งบลงทุน"]?.approved || 0)}
+            description={`คิดเป็น ${formatPercentage(budgetData?.by_lvl1?.["งบลงทุน"]?.approved || 0, budgetData?.total.approved)} ของงบทั้งหมด`}
             trend="up"
             icon={<ArrowUpRight />}
           />
+          <StatCard
+            title="งบดำเนินงาน"
+            value={formatCurrency(budgetData?.by_lvl1?.["งบดำเนินงาน"]?.approved || 0)}
+            description={`คิดเป็น ${formatPercentage(budgetData?.by_lvl1?.["งบดำเนินงาน"]?.approved || 0, budgetData?.total.approved)} ของงบทั้งหมด`}
+            icon={<Building />}
+          /> 
           <StatCard
             title="จำนวนรายการ"
             value={`${formatNumber(amountProject)} รายการ`}
             description={`จำนวนรายการงบประมาณทั้งหมด`}
             icon={<Landmark />}
-          />
-          <StatCard
-            title="โครงการก่อสร้าง"
-            value={`${formatNumber(budgetData?.by_lvl1?.["งบลงทุน"]?.project_count || 0)} โครงการ`}
-            description={`โครงการด้านการลงทุนและก่อสร้าง`}
-            icon={<Building />}
             action={
               <Button variant="outline" asChild className="w-full mt-2">
                 <Link to="/projects/2569" className="flex items-center justify-center gap-2">
@@ -327,7 +330,7 @@ const Index = () => {
 
         {/* ปุ่มดาวน์โหลดไฟล์ */}
         <div className="mt-4 flex flex-col sm:flex-row gap-3 justify-center">
-          <Button 
+          <Button
             onClick={downloadCSV}
             disabled={!budgetItems.length}
             size="lg"
@@ -336,7 +339,7 @@ const Index = () => {
             <Download className="h-5 w-5 mr-2" />
             ดาวน์โหลดข้อมูล (CSV)
           </Button>
-          <Button 
+          <Button
             onClick={openPDF}
             size="lg"
             variant="outline"
@@ -376,9 +379,9 @@ const Index = () => {
         <Card className="mt-4">
           <CardHeader className="flex flex-col sm:flex-row items-start sm:items-center justify-between space-y-2 sm:space-y-0">
             <div className="space-y-1.5">
-              <CardTitle className="text-lg sm:text-xl">โครงการก่อสร้างมูลค่าสูงสุด</CardTitle>
+              <CardTitle className="text-lg sm:text-xl">โครงการงบดำเนินงานและลงทุนมูลค่าสูงสุด</CardTitle>
               <CardDescription className="text-sm sm:text-base">
-                แสดง 10 โครงการด้านที่ดินและสิ่งก่อสร้างที่มีงบประมาณสูงที่สุด
+                แสดง 10 โครงการงบดำเนินงานและงบลงทุนที่มีงบประมาณสูงที่สุด
               </CardDescription>
             </div>
             <Button variant="outline" asChild className="w-full sm:w-auto">
