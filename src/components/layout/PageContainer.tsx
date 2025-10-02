@@ -32,7 +32,7 @@ const PageContainer = ({
           {description && <p className="text-muted-foreground">{description}</p>}
           {date && (
             <div className="text-sm text-muted-foreground">
-              ข้อมูล ณ วันที่ 1 ตุลาคม 2569
+              ข้อมูล ณ วันที่ 1 ตุลาคม 2568
             </div>
           )}
         </div>
